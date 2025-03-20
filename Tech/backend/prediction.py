@@ -12,7 +12,7 @@ class FlightMissPredictor:
   def predict(self, query: PredictionQuery) -> float:
     input_data = np.ndarray(shape=((MAX_FLIGHTS+1)*5 - 1), dtype=np.float32)
     input_data.fill(np.nan)
-    for i, flight in enumerate(query.flightsHistory):
+    for i, flight in enumerate(query.flightsHistory[-MAX_FLIGHTS:]):
       input_data[i*5] = flight.flightClass
       input_data[i*5+1] = flight.ticketCost
       input_data[i*5+2] = flight.timeFromLastFlight

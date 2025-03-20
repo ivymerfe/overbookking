@@ -1,6 +1,8 @@
 let nextFlight = null;
 let userFlightsData = [];
 let flightCounter = 0;
+const FLIGHT_CLASSES = ["Economy", "Business", "First"];
+
 function randomize() {
   const nextFlightTable = document.getElementById("next_flight");
   const randomValue = Math.random();
@@ -17,14 +19,14 @@ function randomize() {
   const priceScale = [1, 5, 20];
   const ticketCost = 20000 + Math.floor(Math.random() * 10000 * priceScale[flightClass]);
   nextFlight = {
-    flightClass: ["Economy", "Business", "First"][flightClass],
+    flightClass: flightClass,
     ticketCost,
     timeFromLastFlight: 4 + Math.floor(Math.random() * 100),
     environmentScore: Math.floor(Math.random() * 100),
   };
 
   nextFlightTable.innerHTML = `
-  <tr><th>Class</th><td>${nextFlight.flightClass}</td></tr>
+  <tr><th>Class</th><td>${FLIGHT_CLASSES[nextFlight.flightClass]}</td></tr>
   <tr><th>Ticket Cost</th><td>${nextFlight.ticketCost}</td></tr>
   <tr><th>Time From Last Flight</th><td>${nextFlight.timeFromLastFlight}</td></tr>
   <tr><th>Environment Score</th><td>${nextFlight.environmentScore}</td></tr>
@@ -46,7 +48,7 @@ function renderUserFlights() {
       (flight) => `
 <tr>
   <td>${flight.flightNumber}</td>
-  <td>${flight.flightClass}</td>
+  <td>${FLIGHT_CLASSES[flight.flightClass]}</td>
   <td>${flight.ticketCost}</td>
   <td>${flight.timeFromLastFlight}</td>
   <td>${flight.environmentScore}</td>
@@ -64,7 +66,6 @@ function addPassed() {
     return;
   }
 
-  const userFlightsTable = document.getElementById("user_flights");
   const newFlight = {
     flightNumber: flightCounter,
     flightClass: nextFlight.flightClass,
@@ -86,7 +87,6 @@ function addMissed() {
     return;
   }
 
-  const userFlightsTable = document.getElementById("user_flights");
   const newFlight = {
     flightNumber: flightCounter,
     flightClass: nextFlight.flightClass,

@@ -3,14 +3,14 @@ from typing import List
 
 
 class FlightData(BaseModel):
-    flightClass: str
+    flightClass: int
     ticketCost: float
     timeFromLastFlight: int
     environmentScore: int
     missed: bool
 
 class PredictionFeed(BaseModel):
-    flightClass: str
+    flightClass: int
     ticketCost: float
     timeFromLastFlight: int
     environmentScore: int

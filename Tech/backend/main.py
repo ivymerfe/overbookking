@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from model import FlightData, PredictionFeed, PredictionQuery
+from prediction import FlightMissPredictor
 
 app = FastAPI()
 
@@ -17,7 +18,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+predictor = FlightMissPredictor()
+
 @app.post("/predict/")
 async def predict(query: PredictionQuery):
-    
-    return {"chance": 0}
+    return {"chance": predictor.predict(query)}

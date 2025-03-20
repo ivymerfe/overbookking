@@ -17,7 +17,7 @@ class FlightMissPredictor:
       input_data[i*5+1] = flight.ticketCost
       input_data[i*5+2] = flight.timeFromLastFlight
       input_data[i*5+3] = flight.environmentScore
-      input_data[i*5+4] = 0.2 if flight.missed else 0.05
+      input_data[i*5+4] = 0.3 if flight.missed else 0
     
     input_data[-4] = query.feed.flightClass
     input_data[-3] = query.feed.ticketCost

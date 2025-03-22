@@ -2,37 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>User Flight Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Он точно придет?</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="main.js"></script>
+    <script src="index.js"></script>
   </head>
   <body>
-    <div id="user_flights_section">
-      <table>
-        <thead>
-          <tr>
-            <th>Flight</th>
-            <th>Class</th>
-            <th>Ticket Cost</th>
-            <th>Time From Last Flight</th>
-            <th>Environment Score</th>
-            <th>Missed Flight?</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="user_flights"></tbody>
-      </table>
-    </div>
-
-    <div id="next_flight_section">
-      <table id="next_flight"></table>
-    </div>
-
-    <div id="buttons_section">
-      <button onclick="randomize()">Randomize</button>
-      <button onclick="predict()">Predict</button>
-      <button onclick="addPassed()">Add Passed</button>
-      <button onclick="addMissed()">Add Missed</button>
+    <div class="container">
+      <div class="left">
+        <label for="userInfo">Инфа о пользователе</label>
+        <textarea id="userInfo"></textarea>
+      </div>
+      <div class="right">
+        <table>
+          <tbody>
+            <tr>
+              <td>Придёт</td>
+              <td id="passChance" style="text-align: left;"></td>
+            </tr>
+            <tr>
+              <td>Не придёт</td>
+              <td id="missChance" style="text-align: left;"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button id="randomizeBtn">Случайные данные</button>
+          <button id="predictBtn">Отправить</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>

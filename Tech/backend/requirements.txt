@@ -1,4 +1,3 @@
-fastapi[standard]
-xgboost
-pandas
-scikit-learn
+Flask
+torch
+transformers

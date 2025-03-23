@@ -5,7 +5,8 @@ https://drive.google.com/file/d/19tc6mQlW3mUoJNV6cUJREacYMHrI0PNs/view?usp=drive
     1. Переходим в папку ./backend
     2. Создаем виртуальное окружение:  
     ```python -m venv venv```
-    3. Активируем виртуальное окружение:  ```./venv/Scripts/Activate```
+    3. Активируем виртуальное окружение:  
+    ```./venv/Scripts/Activate```
     4. Устанавливаем модули:  
     ```pip install -r requirements.txt```
     5. Запускаем:  

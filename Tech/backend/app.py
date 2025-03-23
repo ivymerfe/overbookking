@@ -1,4 +1,9 @@
 import flask
+from transformers import AutoModelForSequenceClassification
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("distilbert/distilbert-base-uncased")
+model = AutoModelForSequenceClassification.from_pretrained("../model/flight_miss_prediction/checkpoint-500")
 
 app = flask.Flask("overbookking-backend")
 
@@ -15,5 +20,7 @@ def after_request(response):
 def handle_json():
     data = flask.request.json
     user_info = data["userInfo"]
-    print(user_info)
-    return flask.jsonify({"passChance": 1, "missChance": 0})
+    inputs = tokenizer(user_info, return_tensors="pt")
+    logits = model(**inputs).logits
+    output = logits[0].softmax(dim=0).tolist()
+    return flask.jsonify({"passChance": output[0], "missChance": output[1]})

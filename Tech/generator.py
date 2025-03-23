@@ -143,7 +143,7 @@ def passenger_generator(amount: int) -> dict:
         passenger["Место отправления"] = random.choice(cities)
         stats += from_cities_probability[passenger["Место отправления"]]
 
-        cities_upd = cities
+        cities_upd = cities.copy()
         cities_upd.remove(passenger["Место отправления"])
 
         passenger["Место назначения"] = random.choice(cities_upd)
@@ -291,5 +291,3 @@ def passenger_generator(amount: int) -> dict:
 test = passenger_generator(5)
 for tst in test.values():
     print(tst, "\n")
-
-

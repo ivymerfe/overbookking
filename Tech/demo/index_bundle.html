@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Демонстрация</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .left {
+        flex: 1.2;
+        margin-right: 4rem;
+      }
+      .right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: inline-block;
+        font-size: 24px; /* Make the label bigger */
+        text-align: center; /* Center the label */
+        width: 100%; /* Ensure it spans the full width */
+      }
+
+      textarea {
+        width: 100%;
+        height: 80vh;
+        resize: none;
+        padding: 10px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        font-size: large;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        outline: none;
+      }
+      table {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+        width: 80%;
+        background-color: #1e1e1e;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #333;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+        width: 50%; /* Equal column size */
+      }
+      button {
+        margin: 1rem 1rem;
+        cursor: pointer;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        font-size: 16px;
+        padding: 0.7rem 1.1rem;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        .left {
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+        textarea {
+          width: 100%;
+        }
+        table {
+          width: 100%;
+        }
+      }
+    </style>
+    <script>
+      const genders = ["Male", "Female"];
+      const ageDiapason = [16, 80];
+
+      const cities = [
+        "Moscow",
+        "Saint Petersburg",
+        "Kazan",
+        "Yekaterinburg",
+        "Novosibirsk",
+        "Nizhny Novgorod",
+        "Sochi",
+        "Rostov-on-Don",
+        "Samara",
+        "Krasnodar",
+        "Ufa",
+        "Tyumen",
+        "Khabarovsk",
+        "Perm",
+        "Omsk",
+        "Chelyabinsk",
+        "Volgograd",
+        "Irkutsk",
+        "Barnaul",
+        "Stavropol",
+        "Bryansk",
+        "Astrakhan",
+        "Voronezh",
+        "Surgut",
+        "Krasnoyarsk",
+        "Magadan",
+        "Norilsk",
+        "Petropavlovsk-Kamchatsky",
+        "Grozny",
+        "Vladikavkaz",
+        "Mirny",
+        "Salekhard",
+        "Ulan-Ude",
+        "Yakutsk",
+        "Nadym",
+        "Novy Urengoy",
+        "Abakan",
+      ];
+
+      const flightClasses = ["Economy", "Business", "First"];
+      const ticketCostsDiapason = [10000, 80000];
+      const isTicketReturning = [true, false];
+      const passengerTypes = ["Regular", "Business"];
+      const flightFrequencyDiapason = [0, 10];
+      const baggageAvailability = [true, false];
+      const ticketBuyingTypes = ["Online", "At the airport", "Travel agency"];
+      const reservationGroup = ["Alone", "With family", "In a group"];
+      const timeBeforeBuyingDiapason = [1, 100];
+      const flightTimeDiapason = [0, 24];
+      const sourceWeathers = ["Snowfall", "Rain", "Clear"];
+      const transferAvailability = [true, false];
+      const timeWhileTransfer = [true, false];
+      const weekDayDiapason = [1, 7];
+      const weekdays = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ];
+      const isPublicHoliday = [true, false];
+      const passengerSocialStatus = ["Student", "Working", "Retired"];
+
+      function getRandomElement(array) {
+        return array[Math.floor(Math.random() * array.length)];
+      }
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function infoGenerator() {
+        const passenger = {};
+
+        passenger["Gender"] = getRandomElement(genders);
+        passenger["Age"] = getRandomInt(...ageDiapason);
+        passenger["Departure City"] = getRandomElement(cities);
+        const citiesUpd = cities.filter(
+          (city) => city !== passenger["Departure City"]
+        );
+        passenger["Destination City"] = getRandomElement(citiesUpd);
+        passenger["Class"] = getRandomElement(flightClasses);
+        passenger["Price"] = getRandomInt(...ticketCostsDiapason);
+        passenger["Refundable"] = getRandomElement(isTicketReturning)
+          ? "Yes"
+          : "No";
+        passenger["Passenger Type"] = getRandomElement(passengerTypes);
+        passenger["Flight Frequency"] = getRandomInt(
+          ...flightFrequencyDiapason
+        );
+        passenger["Baggage Availability"] = getRandomElement(
+          baggageAvailability
+        )
+          ? "Yes"
+          : "No";
+        passenger["Purchase Method"] = getRandomElement(ticketBuyingTypes);
+        passenger["Booking Group"] = getRandomElement(reservationGroup);
+        passenger["Time Before Flight"] = getRandomInt(
+          ...timeBeforeBuyingDiapason
+        );
+        passenger["Flight Duration"] = getRandomInt(...flightTimeDiapason);
+        passenger["Weather at Departure"] = getRandomElement(sourceWeathers);
+        passenger["Transfer"] = getRandomElement(transferAvailability)
+          ? "Yes"
+          : "No";
+        if (passenger["Transfer"] === "Yes") {
+          passenger["Delay Between Flights"] = getRandomElement(
+            timeWhileTransfer
+          )
+            ? "Yes"
+            : "No";
+        }
+        const passengerWeekday = getRandomInt(...weekDayDiapason);
+        passenger["Day of the Week"] = weekdays[passengerWeekday - 1];
+        passenger["Public Holiday"] = getRandomElement(isPublicHoliday)
+          ? "Yes"
+          : "No";
+        passenger["Social Status"] = getRandomElement(passengerSocialStatus);
+
+        const passengerDesc = Object.entries(passenger)
+          .map(([key, value]) => `${key}: ${value}`)
+          .join("\n");
+        return passengerDesc;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .getElementById("predictBtn")
+          .addEventListener("click", async () => {
+            const userInfo = document.getElementById("userInfo").value;
+
+            try {
+              const response = await fetch(
+                "http://localhost:5000/predict",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ userInfo }),
+                }
+              );
+
+              if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+                document.getElementById("passChance").textContent =
+                  data.passChance;
+                document.getElementById("missChance").textContent =
+                  data.missChance;
+              } else {
+                console.error("Error:", response.statusText);
+              }
+            } catch (error) {
+              console.error("Fetch error:", error);
+            }
+          });
+
+        document
+          .getElementById("randomizeBtn")
+          .addEventListener("click", () => {
+            document.getElementById("userInfo").value = infoGenerator();
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <label for="userInfo">Инфа о пользователе</label>
+        <textarea id="userInfo" spellcheck="false"></textarea>
+      </div>
+      <div class="right">
+        <table>
+          <tbody>
+            <tr>
+              <td>Придёт</td>
+              <td id="passChance" style="text-align: left"></td>
+            </tr>
+            <tr>
+              <td>Не придёт</td>
+              <td id="missChance" style="text-align: left"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button id="randomizeBtn">Случайные данные</button>
+          <button id="predictBtn">Отправить</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
